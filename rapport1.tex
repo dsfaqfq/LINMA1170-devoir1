@@ -67,7 +67,7 @@ Dans cette dernière équation, on peut simplifier l'expression en remarquant qu
 Où $n_{i,j,k} $ est le nombre de cellules carrées $k \in S_{pq}$ avec lesquelles le point $(\Delta x*i,\Delta x*j)$ coïncide.\\
 De plus, comme $U_{pq}$ ne dépend pas de la position du carré $k$, on peut écrire :
 \begin{center}
-    $\underset{k\in S_{pq}}{\sum} \left< \frac{a_{i,j}^{t-1} - a_{i,j}^t}{\Delta t}\right>_k\left(\Delta x\right)^2 = U_{pq} * A_S$
+    $\underset{k\in S_{pq}}{\sum} \left< \frac{U_{pq}}{L_z}\right>_k\left(\Delta x\right)^2 = \frac{U_{pq}}{L_z} * A_S$
 \end{center}
 Où $A_S$ est la surface d'une coupe d'une spire.
 \subsubsection{Équations liées au circruit}
@@ -96,7 +96,7 @@ La visualisation des lignes du champ magnétique sur le domaine étudié peut se
 
 \section{Le phénomène de fill-in}
 \subsection{Explication du phénomène}
-Le fill-in d'une matrice est le nombre d'éléments qui passent d'une valeur nulle à une valeur non-nulle lors de l'exécution d'un algorithme sur celle-ci. Lors d'une factorisation LU, le nombre d'éléments non-nuls de la matrice factorisée est toujours supérieur à celui de la matrice initiale. Cela s'explique par le fait que, à chaque itération de l'algorithme, on a $C = C + vu^T$ où $C$ est le masque booléen de la matrice étudiée. Cela signifie que les entrées $C_{ij}$ où $v_i$ et $u_j$ sont à "\textbf{True}" prennent également la valeur "\textbf{True}". L'ordre des lignes et des colonnes de la matrice étudiée est donc extrêmement importants si on veut garder une matrice factorisée la plus creuse possible.
+Le fill-in d'une matrice est le nombre d'éléments qui passent d'une valeur nulle à une valeur non-nulle lors de l'exécution d'un algorithme sur celle-ci. Lors d'une factorisation LU, le nombre d'éléments non-nuls de la matrice factorisée est toujours supérieur à celui de la matrice initiale. Cela s'explique par le fait que, à chaque itération de l'algorithme, on a $C = C + vu^T$ où $C$ est le masque booléen de la matrice étudiée. Cela signifie que les entrées $C_{ij}$ où $v_i$ et $u_j$ sont à "\textbf{True}" prennent également la valeur "\textbf{True}". L'ordre des lignes et des colonnes de la matrice étudiée est donc extrêmement important si on veut garder une matrice factorisée la plus creuse possible.
 Par exemple, dans l'exemple suivant, on peut passer de la création d'une matrice quasiment pleine à un fill-in nul en inversant deux colonnes.
 \begin{center}
     $
@@ -160,7 +160,7 @@ Avec la construction de la matrice $A$ décrite précédemment, on observe un fi
 
 \section{Comparaison et discussion des résultats en fonction de $M$ et $Mt$}
 
-L'utilisation de valeurs plus grandes pour les paramètres $M$ et $Mt$ implique une discrétisation du problème plus importante et donc des pas (de temps pour $Mt$ et de distance pour $M$) plus petits. L'utilisation de pas plus petits pour la discrétisation augmente donc la précision de la solution, car les erreurs que la linéarisation du système provoque sont des fonctions (croissantes évidemment) dépendantes de ceux-ci. Par exemple, la discrétisation de l'opérateur Laplacien est en $\mathcal{O}((\Delta x)^2)$. De plus, si on regarde les puissances entrantes et sortantes du mécanisme à tous les pas de temps étudiés (sur deux périodes), on observe un affinage clair des résultats quand $M$ et $Mt$ augmentent. Il est également important de noter que les équations ne gardent du sens que si $M+1$ est un multiple de $20$ (le maillage coïncide avec les spires.).
+L'utilisation de valeurs plus grandes pour les paramètres $M$ et $Mt$ implique une discrétisation du problème plus importante et donc des pas (de temps pour $Mt$ et de distance pour $M$) plus petits. L'utilisation de pas plus petits pour la discrétisation augmente donc la précision de la solution, car les erreurs que la linéarisation du système provoque sont des fonctions (croissantes évidemment) dépendantes de ceux-ci. Par exemple, la discrétisation de l'opérateur Laplacien est en $\mathcal{O}((\Delta x)^2)$. De plus, si on regarde les puissances entrantes et sortantes du mécanisme à tous les pas de temps étudiés (sur deux périodes avec $f = 500$), on observe un affinage clair des résultats quand $M$ et $Mt$ augmentent. Il est également important de noter que les équations ne gardent du sens que si $M+1$ est un multiple de $20$ (le maillage coïncide avec les spires.).
 
 \begin{figure}[H]
     \centering
